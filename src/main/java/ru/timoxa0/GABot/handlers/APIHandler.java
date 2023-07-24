@@ -4,6 +4,7 @@ import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.HeaderMap;
 import io.undertow.util.Headers;
+import io.undertow.util.StatusCodes;
 import org.apache.http.client.utils.URIBuilder;
 import org.json.JSONObject;
 import ru.timoxa0.GABot.models.Cape;
@@ -32,6 +33,7 @@ public class APIHandler implements HttpHandler {
             httpServerExchange.dispatch(this);
             return;
         }
+        httpServerExchange.setStatusCode(StatusCodes.FORBIDDEN);
         if (httpServerExchange.getRequestURI().equals("/texture-provider")) {
             Map<String, Deque<String>> requestParams = httpServerExchange.getQueryParameters();
             if (requestParams.containsKey("username") | requestParams.containsKey("uuid")) {
@@ -94,16 +96,19 @@ public class APIHandler implements HttpHandler {
                                         )
                                         .put("digest", getHash(cape.stream()))
                                 );
+                        httpServerExchange.setStatusCode(StatusCodes.OK);
                         httpServerExchange.getResponseSender()
                                 .send(jsonBuilder.toString());
                     }
                 } else {
+                    httpServerExchange.setStatusCode(StatusCodes.NOT_FOUND);
                     httpServerExchange.getResponseHeaders()
                             .put(Headers.CONTENT_TYPE, "application/json");
                     httpServerExchange.getResponseSender()
                             .send(new JSONObject().toString());
                 }
             } else {
+                httpServerExchange.setStatusCode(StatusCodes.NOT_IMPLEMENTED);
                 httpServerExchange.getResponseHeaders()
                         .put(Headers.CONTENT_TYPE, "application/json");
                 httpServerExchange.getResponseSender()
