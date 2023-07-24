@@ -122,7 +122,7 @@ public class SkinCommand extends SlashCommand {
                                 .queue();
                     }
                 } catch (FileNotFoundException ignored) {
-                    event.reply(trn.getProperty("commands.skin.mojang.apierror")).setEphemeral(true).queue();
+                    event.reply(trn.getProperty("commands.skin.mojang.api.notfound")).setEphemeral(true).queue();
                 } catch (IOException e) {
                     event.reply(trn.getProperty("misc.command.error")).setEphemeral(true).queue();
                     logger.error(e.getMessage());
