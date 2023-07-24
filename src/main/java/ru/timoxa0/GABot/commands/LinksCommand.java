@@ -4,6 +4,7 @@ import com.jagrosh.jdautilities.command.SlashCommand;
 import com.jagrosh.jdautilities.command.SlashCommandEvent;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import org.apache.logging.log4j.LogManager;
 import ru.timoxa0.GABot.handlers.ConfigHandler;
 import ru.timoxa0.GABot.handlers.TranslationHandler;
 
@@ -16,6 +17,7 @@ public class LinksCommand extends SlashCommand {
     public LinksCommand() {
         this.name = "links";
         this.help = trn.getProperty("commands.links.description");
+        LogManager.getLogger(this.getClass()).info(String.format("Added command: /%s", this.name));
     }
 
     @Override
@@ -34,17 +36,35 @@ public class LinksCommand extends SlashCommand {
             jarLink = String.format("[%s](%s)", trn.getProperty("links.jar.name"), cfg.getProperty("ds.bot.links.jar"));
         }
 
-        MessageEmbed embed = new EmbedBuilder()
+        EmbedBuilder embed = new EmbedBuilder()
                 .setTitle(trn.getProperty("links.title"))
                 .setDescription(trn.getProperty("links.description"))
                 .setColor(Color.decode(cfg.getProperty("ds.bot.embed.color")))
                 .addField(trn.getProperty("links.exe.os"), exeLink, true)
-                .addField(trn.getProperty("links.jar.os"), jarLink, true)
-                .build();
+                .addField(trn.getProperty("links.jar.os"), jarLink, true);
+
+        if (!cfg.getProperty("ds.bot.embed.author.name", "").isEmpty()) {
+            if (!cfg.getProperty("ds.bot.embed.author.url", "").isEmpty()) {
+                if (!cfg.getProperty("ds.bot.embed.author.icon", "").isEmpty()) {
+                    embed.setAuthor(
+                            cfg.getProperty("ds.bot.embed.author.name"),
+                            cfg.getProperty("ds.bot.embed.author.url"),
+                            cfg.getProperty("ds.bot.embed.author.icon")
+                    );
+                } else {
+                    embed.setAuthor(
+                            cfg.getProperty("ds.bot.embed.author.name"),
+                            cfg.getProperty("ds.bot.embed.author.url")
+                    );
+                }
+            } else {
+                embed.setAuthor(cfg.getProperty("ds.bot.embed.author.name"));
+            }
+        }
 
         event.reply("")
                 .setEphemeral(true)
-                .setEmbeds(embed)
+                .setEmbeds(embed.build())
                 .queue();
     }
 }
