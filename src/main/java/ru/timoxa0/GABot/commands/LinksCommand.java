@@ -3,7 +3,6 @@ package ru.timoxa0.GABot.commands;
 import com.jagrosh.jdautilities.command.SlashCommand;
 import com.jagrosh.jdautilities.command.SlashCommandEvent;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.apache.logging.log4j.LogManager;
 import ru.timoxa0.GABot.handlers.ConfigHandler;
 import ru.timoxa0.GABot.handlers.TranslationHandler;

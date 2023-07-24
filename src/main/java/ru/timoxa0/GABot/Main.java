@@ -1,6 +1,5 @@
 package ru.timoxa0.GABot;
 
-import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import io.undertow.Undertow;
 import net.dv8tion.jda.api.JDA;
