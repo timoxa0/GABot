@@ -59,26 +59,33 @@ public class Main {
                 cfg.getProperty("db.columns.username"), cfg.getProperty("db.columns.password")
         );
 
-        CommandClientBuilder builder = new CommandClientBuilder();
-        CommandClient commandClient = builder.setOwnerId(cfg.getProperty("ds.bot.owner.id"))
-                .forceGuildOnly(cfg.getProperty("ds.bot.guild.id"))
+        CommandClientBuilder builder = new CommandClientBuilder()
+                .setOwnerId(cfg.getProperty("ds.bot.owner.id", "0"))
+                .useHelpBuilder(false)
                 .addSlashCommands(
                         new HelpCommand(),
                         new RegisterCommand(),
-                        new NickCommand(),
+                        new NameCommand(),
                         new PasswordCommand(),
                         new SkinCommand(),
                         new CapeCommand(),
                         new LinksCommand()
                 )
-                .setStatus(OnlineStatus.IDLE)
+                .setStatus(OnlineStatus.fromKey(cfg.getProperty("ds.bot.status").toLowerCase()))
                 .setActivity(Activity.of(
-                        Activity.ActivityType.valueOf(cfg.getProperty("ds.bot.status.activity").toUpperCase()),
-                        cfg.getProperty("ds.bot.status.text")))
-                .useHelpBuilder(false)
-                .build();
+                        Activity.ActivityType.valueOf(cfg.getProperty("ds.bot.activity.type").toUpperCase()),
+                        cfg.getProperty("ds.bot.activity.text"))
+                );
+
+        if (!cfg.getProperty("ds.bot.guild.id", "").isEmpty()) {
+            builder.forceGuildOnly(cfg.getProperty("ds.bot.guild.id"));
+            logger.info("Forcing bot to be guild only. Guild id: " + cfg.getProperty("ds.bot.guild.id"));
+        } else {
+            logger.warn("Guild ID not set. Bot will update commands on all servers. Command updates will be slower");
+        }
+
         JDA jda = JDABuilder.createDefault(cfg.getProperty("ds.bot.token"))
-                .addEventListeners(commandClient)
+                .addEventListeners(builder.build())
                 .enableIntents(GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_MEMBERS)
                 .build();
 
