@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Properties>
+        <Property name="CLR">{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=white, TRACE=black}</Property>
+        <Property name="LOG_STDOUT_PATTERN">
+            %highlight{%-5p}${CLR} | %d{dd.MM.yy HH:mm:ss} | %style{%-15c{1}}{bright blue} | %style{%m%n}{bright white}
+            <!--%d{dd.MM.yy HH:mm:ss} [%-5level] %c{3}: %m%n -->
+        </Property>
+        <Property name="LOG_FILE_PATTERN">
+            %-5p | %d{dd.MM.yy HH:mm:ss} | %-15c{1} | %m%n
+            <!--%d{dd.MM.yy HH:mm:ss} [%-5level] %c{3}: %m%n -->
+        </Property>
+    </Properties>
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT" follow="true">
+            <PatternLayout  pattern="${LOG_STDOUT_PATTERN}" disableAnsi="false" charset="UTF-8"/>
+        </Console>
+        <File name="LogToFile" fileName="latest.log">
+            <PatternLayout  pattern="${LOG_FILE_PATTERN}" disableAnsi="false" charset="UTF-8"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
