@@ -3,6 +3,7 @@ package ru.timoxa0.GABot.handlers;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Properties;
 
@@ -21,7 +22,7 @@ public class TranslationHandler {
 
     private TranslationHandler(Path configPath) throws IOException {
         File configFile = new File(configPath.toUri());
-        prop.load(new FileReader(configFile));
+        prop.load(new FileReader(configFile, StandardCharsets.UTF_8));
     }
 
     public String getProperty(String property) {
