@@ -4,6 +4,7 @@ import com.jagrosh.jdautilities.command.SlashCommand;
 import com.jagrosh.jdautilities.command.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import org.apache.logging.log4j.LogManager;
 import ru.timoxa0.GABot.handlers.TranslationHandler;
 import ru.timoxa0.GABot.models.MCUser;
 
@@ -20,6 +21,7 @@ public class PasswordCommand extends SlashCommand {
                 OptionType.STRING, trn.getProperty("options.password"),
                 trn.getProperty("options.password.description")).setRequired(true)
         );
+        LogManager.getLogger(this.getClass()).info(String.format("Added command: /%s", this.name));
     }
 
     @Override

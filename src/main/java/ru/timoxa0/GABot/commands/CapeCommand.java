@@ -24,6 +24,7 @@ public class CapeCommand extends SlashCommand {
         this.name = "cape";
         this.help = trn.getProperty("commands.cape.description");
         this.children = new SlashCommand[]{new Upload(), new Remove()};
+        logger.info(String.format("Added command: /%s", this.name));
     }
 
     @Override

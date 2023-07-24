@@ -31,6 +31,7 @@ public class SkinCommand extends SlashCommand {
         this.name = "skin";
         this.help = trn.getProperty("commands.skin.description");
         this.children = new SlashCommand[]{new Upload(), new Mojang()};
+        logger.info(String.format("Added command: /%s", this.name));
     }
 
     @Override
