@@ -43,7 +43,4 @@ bin/
 .DS_Store
 
 ### Other ###
-/assets/skins/
-/assets/capes/
-/assets/default/
-/assets/latest.log
+/workdir/
