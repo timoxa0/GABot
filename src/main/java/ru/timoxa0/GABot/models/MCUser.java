@@ -25,6 +25,9 @@ public class MCUser {
     public static MCUser getByName(String name) {
         return dbHandler.getUserByName(name);
     }
+    public static MCUser getByUUID(String uuid) {
+        return dbHandler.getUserByUUID(uuid);
+    }
 
     public static boolean checkFor(String id) {
         return dbHandler.checkForUser(id);
