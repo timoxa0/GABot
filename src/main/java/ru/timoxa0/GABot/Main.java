@@ -32,6 +32,7 @@ public class Main {
 
         try {
             TranslationHandler.createTranslationHandler(Path.of(cfg.getProperty("ds.bot.translation")));
+            logger.info("Loaded bot language: " + TranslationHandler.getTranslationHandler().getProperty("translation.lang"));
         } catch (IOException e) {
             logger.fatal("Failed to load translation file!");
             logger.fatal(e.getMessage());
