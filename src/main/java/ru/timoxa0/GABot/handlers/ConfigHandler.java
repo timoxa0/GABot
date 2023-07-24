@@ -32,4 +32,8 @@ public class ConfigHandler {
     public String getProperty(String property) {
         return prop.getProperty(property);
     }
+
+    public String getProperty(String property, String defaultValue) {
+        return prop.getProperty(property, defaultValue);
+    }
 }
