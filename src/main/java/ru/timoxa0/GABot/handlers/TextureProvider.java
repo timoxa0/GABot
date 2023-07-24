@@ -141,7 +141,7 @@ public class TextureProvider {
         }
     }
 
-    public Cape        getCape(MCUser user) {
+    public Cape getCape(MCUser user) {
         try {
             Path capePath = this.capeDir.resolve(user.getUUID());
             if (!capePath.toFile().exists()) {
