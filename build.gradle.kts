@@ -67,5 +67,5 @@ tasks {
         archiveBaseName.set("GABot")
     }
 }
-tasks.runShadow.get().workingDir = File(/* pathname = */ "assets")
+tasks.runShadow.get().workingDir = File(/* pathname = */ "workdir")
 
