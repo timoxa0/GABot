@@ -23,7 +23,7 @@ public class HelpCommand extends SlashCommand {
     protected void execute(SlashCommandEvent event) {
         EmbedBuilder embed = new EmbedBuilder()
                 .setTitle(trn.getProperty("help.title"))
-                .setDescription("help.description")
+                .setDescription(trn.getProperty("help.description"))
                 .setColor(Color.decode(cfg.getProperty("ds.bot.embed.color")))
                 .addField("/register", trn.getProperty("help.commands.register"), true)
                 .addBlankField(true)
