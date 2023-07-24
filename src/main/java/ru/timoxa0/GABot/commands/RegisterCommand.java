@@ -4,6 +4,7 @@ import com.jagrosh.jdautilities.command.SlashCommand;
 import com.jagrosh.jdautilities.command.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import org.apache.logging.log4j.LogManager;
 import ru.timoxa0.GABot.handlers.TranslationHandler;
 import ru.timoxa0.GABot.models.MCUser;
 
@@ -17,8 +18,8 @@ public class RegisterCommand extends SlashCommand {
     public RegisterCommand() {
         List<OptionData> options = new ArrayList<>();
         options.add(new OptionData(
-                OptionType.STRING, trn.getProperty("options.nick"),
-                trn.getProperty("options.nick.description")).setRequired(true)
+                OptionType.STRING, trn.getProperty("options.name"),
+                trn.getProperty("options.name.description")).setRequired(true)
         );
         options.add(new OptionData(
                 OptionType.STRING, trn.getProperty("options.password"),
@@ -29,6 +30,7 @@ public class RegisterCommand extends SlashCommand {
         this.help = trn.getProperty("commands.register.description");
         this.options = options;
         this.aliases = new String[] {"reg"};
+        LogManager.getLogger(this.getClass()).info(String.format("Added command: /%s", this.name));
     }
 
     @Override
