@@ -121,6 +121,8 @@ public class SkinCommand extends SlashCommand {
                         case 2 -> event.reply(trn.getProperty("misc.command.error")).setEphemeral(true)
                                 .queue();
                     }
+                } catch (FileNotFoundException ignored) {
+                    event.reply(trn.getProperty("commands.skin.mojang.apierror")).setEphemeral(true).queue();
                 } catch (IOException e) {
                     event.reply(trn.getProperty("misc.command.error")).setEphemeral(true).queue();
                     logger.error(e.getMessage());
