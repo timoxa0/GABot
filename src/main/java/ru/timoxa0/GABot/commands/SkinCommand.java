@@ -105,25 +105,21 @@ public class SkinCommand extends SlashCommand {
                 try {
                     String userid_url = "https://api.mojang.com/users/profiles/minecraft/";
                     String userinfo_url = "https://sessionserver.mojang.com/session/minecraft/profile/";
-                    JSONObject apiResponse = readJsonFromUrl(userid_url + event.getOptions().get(0).getAsString());
-                    if (!apiResponse.toMap().containsKey("error")) {
-                        String userid = apiResponse.get("id").toString();
-                        String encodedTextureData = ((JSONObject) ((JSONArray) readJsonFromUrl(userinfo_url + userid)
-                                .get("properties")).get(0)).get("value").toString();
-                        String skinUrl = ((JSONObject) ((JSONObject) new JSONObject(
-                                new String(Base64.decodeBase64(encodedTextureData), StandardCharsets.UTF_8))
-                                .get("textures")).get("SKIN")).get("url").toString();
+                    String userid = readJsonFromUrl(userid_url + event.getOptions().get(0).getAsString())
+                            .get("id").toString();
+                    String encodedTextureData = ((JSONObject) ((JSONArray) readJsonFromUrl(userinfo_url + userid)
+                            .get("properties")).get(0)).get("value").toString();
+                    String skinUrl = ((JSONObject) ((JSONObject) new JSONObject(
+                            new String(Base64.decodeBase64(encodedTextureData), StandardCharsets.UTF_8))
+                            .get("textures")).get("SKIN")).get("url").toString();
 
-                        switch (TEXTURE_PROVIDER.downloadSkin(user, new URL(skinUrl).openStream())) {
-                            case 0 -> event.reply(trn.getProperty("commands.skin.mojang.success")).setEphemeral(true)
-                                    .queue();
-                            case 1 -> event.reply(trn.getProperty("commands.skin.mojang.incorrect")).setEphemeral(true)
-                                    .queue();
-                            case 2 -> event.reply(trn.getProperty("misc.command.error")).setEphemeral(true)
-                                    .queue();
-                        }
-                    } else {
-                        event.reply(trn.getProperty("commands.skin.mojang.apierror")).setEphemeral(true).queue();
+                    switch (TEXTURE_PROVIDER.downloadSkin(user, new URL(skinUrl).openStream())) {
+                        case 0 -> event.reply(trn.getProperty("commands.skin.mojang.success")).setEphemeral(true)
+                                .queue();
+                        case 1 -> event.reply(trn.getProperty("commands.skin.mojang.incorrect")).setEphemeral(true)
+                                .queue();
+                        case 2 -> event.reply(trn.getProperty("misc.command.error")).setEphemeral(true)
+                                .queue();
                     }
                 } catch (IOException e) {
                     event.reply(trn.getProperty("misc.command.error")).setEphemeral(true).queue();
