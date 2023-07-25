@@ -56,7 +56,7 @@ public class SkinCommand extends SlashCommand {
                     switch (TEXTURE_PROVIDER.downloadSkin(user, attachment.getProxy().download().get())) {
                         case 0 -> event.reply(trn.getProperty("commands.skin.upload.success")).setEphemeral(true)
                                 .queue();
-                        case 1 -> event.reply(trn.getProperty("commands.skin.upload.incorrect")).setEphemeral(true)
+                        case 1 -> event.reply(trn.getProperty("commands.skin.incorrect")).setEphemeral(true)
                                 .queue();
                         case 2 -> event.reply(trn.getProperty("misc.command.error")).setEphemeral(true)
                                 .queue();
@@ -116,7 +116,7 @@ public class SkinCommand extends SlashCommand {
                     switch (TEXTURE_PROVIDER.downloadSkin(user, new URL(skinUrl).openStream())) {
                         case 0 -> event.reply(trn.getProperty("commands.skin.mojang.success")).setEphemeral(true)
                                 .queue();
-                        case 1 -> event.reply(trn.getProperty("commands.skin.mojang.incorrect")).setEphemeral(true)
+                        case 1 -> event.reply(trn.getProperty("commands.skin.incorrect")).setEphemeral(true)
                                 .queue();
                         case 2 -> event.reply(trn.getProperty("misc.command.error")).setEphemeral(true)
                                 .queue();

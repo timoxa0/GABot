@@ -50,7 +50,7 @@ public class CapeCommand extends SlashCommand {
                     switch (TEXTURE_PROVIDER.downloadCape(user, attachment.getProxy().download().get())) {
                         case 0 -> event.reply(trn.getProperty("commands.cape.upload.success")).setEphemeral(true)
                                 .queue();
-                        case 1 -> event.reply(trn.getProperty("commands.cape.upload.incorrect")).setEphemeral(true)
+                        case 1 -> event.reply(trn.getProperty("commands.cape.incorrect")).setEphemeral(true)
                                 .queue();
                         case 2 -> event.reply(trn.getProperty("misc.command.error")).setEphemeral(true)
                                 .queue();
