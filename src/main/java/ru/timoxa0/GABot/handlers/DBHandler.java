@@ -46,6 +46,7 @@ public class DBHandler {
             disconnect(conn);
         } else {
             logger.fatal("Unable to connect to database! Check database settings.");
+            System.exit(1);
         }
 
     }
