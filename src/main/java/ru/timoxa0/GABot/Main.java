@@ -21,7 +21,6 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        ConfigHandler cfg = null;
 
         try {
             if (ConfigHandler.createConfigHandler(Path.of("bot.config").toFile())) {
