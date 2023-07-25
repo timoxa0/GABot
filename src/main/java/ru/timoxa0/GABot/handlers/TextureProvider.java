@@ -62,7 +62,7 @@ public class TextureProvider {
             BufferedImage img = ImageIO.read(inputStream);
             int width = img.getWidth();
             int height = img.getHeight();
-            if (!((width % 64 == 0 && height % 64 == 0) && (width <= 512 && height <= 512))) {
+            if (!((width % 64 == 0 && height % 32 == 0) && (width <= 512 && height <= 512))) {
                 return 1;
             }
             Path path = this.skinDir.resolve(user.getUUID());
