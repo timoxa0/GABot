@@ -1,18 +1,17 @@
 package ru.timoxa0.GABot.handlers;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.Properties;
 
 public class TranslationHandler {
     private static TranslationHandler configHandler = null;
     private final Properties prop = new Properties();
 
-    public static synchronized void createTranslationHandler(Path configPath) throws IOException {
-        configHandler = new TranslationHandler(configPath);
+    public static synchronized void createTranslationHandler(String trnName) throws IOException {
+        configHandler = new TranslationHandler(trnName);
     }
 
     public static synchronized TranslationHandler getTranslationHandler() {
@@ -20,9 +19,11 @@ public class TranslationHandler {
         return configHandler;
     }
 
-    private TranslationHandler(Path configPath) throws IOException {
-        File configFile = new File(configPath.toUri());
-        prop.load(new FileReader(configFile, StandardCharsets.UTF_8));
+    private TranslationHandler(String trnName) throws IOException {
+        try (InputStream langRes = TranslationHandler.class.getResourceAsStream(String.format("/assets/lang/%s.properties", trnName))) {
+            assert langRes != null;
+            prop.load(new InputStreamReader(langRes, StandardCharsets.UTF_8));
+        }
     }
 
     public String getProperty(String property) {
