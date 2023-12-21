@@ -89,7 +89,8 @@ public class DBHandler {
                             rs.getString(this.idColumn),
                             rs.getString(this.usernameColumn),
                             rs.getString(this.passwordColumn),
-                            rs.getString(this.uuidColumn)
+                            rs.getString(this.uuidColumn),
+                            true
                     );
                 }
                 disconnect(conn);
@@ -114,7 +115,8 @@ public class DBHandler {
                             rs.getString(this.idColumn),
                             rs.getString(this.usernameColumn),
                             rs.getString(this.passwordColumn),
-                            rs.getString(this.uuidColumn)
+                            rs.getString(this.uuidColumn),
+                            true
                     );
                 }
                 disconnect(conn);
@@ -139,7 +141,8 @@ public class DBHandler {
                             rs.getString(this.idColumn),
                             rs.getString(this.usernameColumn),
                             rs.getString(this.passwordColumn),
-                            rs.getString(this.uuidColumn)
+                            rs.getString(this.uuidColumn),
+                            true
                     );
                 }
                 disconnect(conn);

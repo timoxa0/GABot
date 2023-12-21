@@ -21,7 +21,11 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-
+        Signal.handle(new Signal("INT"), signal -> {
+                    logger.info("Caught SIGINT -> Performing shutdown");
+                    System.exit(0);
+                }
+        );
         try {
             if (ConfigHandler.createConfigHandler(Path.of("bot.config").toFile())) {
                 try {

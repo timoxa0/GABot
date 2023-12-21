@@ -40,6 +40,14 @@ public class MCUser {
         this.uuid = uuid;
     }
 
+    public MCUser(String id, String name, String password, String uuid, boolean rawPassword) {
+        this.id = id;
+        this.name = name;
+        if (rawPassword) {this.password = password;}
+        else {this.password = encodePassword(password);}
+        this.uuid = uuid;
+    }
+
     public MCUser(String id, String name, String password) {
         this.id = id;
         this.name = name;

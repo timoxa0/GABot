@@ -24,7 +24,7 @@ public class APIHandler implements HttpHandler {
 
     private static String getHash(InputStream inputStream) throws IOException {
         String md5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(inputStream);
-        return Base64.getEncoder().encodeToString(md5.getBytes());
+        return md5;
     }
 
     @Override
@@ -53,6 +53,7 @@ public class APIHandler implements HttpHandler {
                             case "cape" -> inputStream = TEXTURE_PROVIDER.getCape(user).stream();
                         }
                         if (inputStream != null) {
+                            httpServerExchange.setStatusCode(StatusCodes.OK);
                             httpServerExchange.startBlocking();
                             httpServerExchange.getResponseHeaders()
                                     .put(Headers.CONTENT_TYPE, "image/png");
